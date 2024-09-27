@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session Details - Code the Future</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #3498db;
+        text-decoration: none;
+      }
+      .session-content {
+        margin-top: 20px;
+      }
+      .session-content p {
+        margin-bottom: 15px;
+      }
+      .session-content ul {
+        padding-left: 20px;
+      }
+      .presenter-info {
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        padding: 15px;
+        margin-top: 20px;
+      }
+      .presenter-info h2 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+      .presenter-info img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 15px;
+      }
+      .presenter-info p {
+        margin: 5px 0;
+      }
+      .presenter-info a {
+        color: #3498db;
+        text-decoration: none;
+      }
+      .presenter-info a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <a href="sessions.html" class="back-link">&larr; Back to Sessions</a>
+      <h1 id="sessionTitle">Session Title</h1>
+      <div id="sessionContent" class="session-content">
+        <!-- Session content will be dynamically inserted here -->
+      </div>
+      <div id="presenterInfo" class="presenter-info">
+        <!-- Presenter information will be dynamically inserted here -->
+      </div>
+    </div>
+
+    <script>
+      // Full session data (you would typically fetch this from a server)
+      const sessionsData = {
+        "cyber-security": {
+          title: "Introduction to Cyber Security",
+          content: `
+                    <p>This session provides a comprehensive introduction to the world of cyber security. We explore the fundamental concepts, current threats, and best practices for maintaining digital safety.</p>
+                    <h2>Key Topics Covered:</h2>
+                    <ul>
+                        <li>Overview of cyber security landscape</li>
+                        <li>Common types of cyber attacks</li>
+                        <li>Basic principles of network security</li>
+                        <li>Introduction to encryption and its importance</li>
+                        <li>Best practices for personal and organizational cyber hygiene</li>
+                    </ul>
+                    <p>By the end of this session, participants will have a solid foundation in cyber security concepts and be better equipped to protect themselves and their organizations in the digital world.</p>
+                `,
+          presenter: {
+            name: "Hauwa Saleh",
+            title: "Senior Cyber Security Analyst",
+            bio: "Jane Doe is a seasoned cyber security professional with over 10 years of experience in the field. She has worked with Fortune 500 companies to secure their digital assets and train their teams in best security practices.",
+            linkedin: "https://www.linkedin.com/in/janedoe",
+            image: "https://via.placeholder.com/200",
+          },
+        },
+        "code-future-2": {
+          title: "Code The Future - Session 2",
+          content: `
+                    <p>In this session, we were introduced to HTML. The session was divided into sections that guided us through building a basic HTML page using various tags and utilizing browser dev tools.</p>
+                    <p>We started with terminal setup before transitioning to VS Code.</p>
+                    <h2>Session Goals:</h2>
+                    <ul>
+                        <li>Understanding what HTML is and its uses</li>
+                        <li>Recognizing and writing the structure of a basic HTML page</li>
+                        <li>Using common HTML elements to add content to a page</li>
+                        <li>Utilizing Chrome Dev Tools to inspect pages</li>
+                        <li>Creating our own HTML page with various HTML elements</li>
+                    </ul>
+                    <p>This session provided a comprehensive overview of HTML, and I learned how to create and inspect HTML pages effectively.</p>
+                `,
+        },
+        // Add more session data as needed
+      };
+
+      function getSessionIdFromURL() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("id");
+      }
+
+      function loadSessionContent() {
+        const sessionId = getSessionIdFromURL();
+        const session = sessionsData[sessionId];
+
+        if (session) {
+          document.getElementById("sessionTitle").textContent = session.title;
+          document.getElementById("sessionContent").innerHTML = session.content;
+
+          const presenterInfo = document.getElementById("presenterInfo");
+          presenterInfo.innerHTML = `
+                    <img src="${session.presenter.image}" alt="${session.presenter.name}">
+                    <h2>Presented by: ${session.presenter.name}</h2>
+                    <p><strong>${session.presenter.title}</strong></p>
+                    <p>${session.presenter.bio}</p>
+                    <p><a href="${session.presenter.linkedin}" target="_blank">Connect on LinkedIn</a></p>
+                `;
+        } else {
+          document.getElementById("sessionContent").innerHTML =
+            "<p>Session not found.</p>";
+          document.getElementById("presenterInfo").style.display = "none";
+        }
+      }
+
+      window.onload = loadSessionContent;
+    </script>
+  </body>
+</html>

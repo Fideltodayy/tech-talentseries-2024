@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Empowering tomorrow's tech leaders with cutting-edge skills. Explore the sessions in our 'Code the Future' series!"
+    />
     <title>Code the Future - Sessions</title>
     <style>
       body {
@@ -44,6 +48,7 @@
       .nav a.active {
         background-color: #3498db;
         color: #fff;
+        cursor: pointer;
       }
       .sessions {
         display: grid;
@@ -56,15 +61,13 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         padding: 20px;
         transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
       }
       .session-card:hover {
         transform: translateY(-5px);
       }
-      .session-card h2 {
-        font-size: 1.2rem;
-        margin-top: 0;
-        color: #2c3e50;
-      }
+
       .session-card p {
         font-size: 0.9rem;
         color: #7f8c8d;
@@ -74,6 +77,41 @@
         margin-top: 10px;
         color: #3498db;
         text-decoration: none;
+      }
+      .session-card .time {
+        font-size: 0.8rem;
+        color: #3498db;
+        margin-bottom: 5px;
+      }
+      .session-card h2 {
+        font-size: 1.2rem;
+        margin-top: 0;
+        margin-bottom: 5px;
+        color: #2c3e50;
+      }
+      .session-card .description {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        flex-grow: 1;
+        margin-bottom: 15px;
+      }
+      .session-card .presenter {
+        font-style: italic;
+        color: #7f8c8d;
+        margin-bottom: 10px;
+      }
+      .session-card .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .session-card .read-more {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .session-card .read-more:hover {
+        text-decoration: underline;
       }
       footer {
         text-align: center;
@@ -103,6 +141,32 @@
       .profile a:hover {
         text-decoration: underline;
       }
+
+      /* Media query for small screen devices */
+      @media (max-width: 600px) {
+        .nav a {
+          padding: 10px 10px;
+          font-size: 0.8rem;
+        }
+        #monday::after {
+          content: "Mon";
+        }
+        #tuesday::after {
+          content: "Tue";
+        }
+        #wednesday::after {
+          content: "Wed";
+        }
+        #thursday::after {
+          content: "Thu";
+        }
+        #friday::after {
+          content: "Fri";
+        }
+        .nav a span {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -115,11 +179,17 @@
       </header>
 
       <nav class="nav" aria-label="Date selection">
-        <a id="monday" onclick="filterByDay('Monday')">Monday</a>
-        <a id="tuesday" onclick="filterByDay('Tuesday')">Tuesday</a>
-        <a id="wednesday" onclick="filterByDay('Wednesday')">Wednesday</a>
-        <a id="thursday" onclick="filterByDay('Thursday')">Thursday</a>
-        <a id="friday" onclick="filterByDay('Friday')">Friday</a>
+        <a id="monday" onclick="filterByDay('Monday')"><span>Monday</span></a>
+        <a id="tuesday" onclick="filterByDay('Tuesday')"
+          ><span>Tuesday</span></a
+        >
+        <a id="wednesday" onclick="filterByDay('Wednesday')"
+          ><span>Wednesday</span></a
+        >
+        <a id="thursday" onclick="filterByDay('Thursday')"
+          ><span>Thursday</span></a
+        >
+        <a id="friday" onclick="filterByDay('Friday')"><span>Friday</span></a>
       </nav>
 
       <section class="sessions" id="sessionContainer">
@@ -128,7 +198,7 @@
 
       <footer>
         <p>&copy; 2024 Code the Future</p>
-        <p>
+        <p class="profile profile">
           Created by
           <a
             class="profile profile"
@@ -139,151 +209,10 @@
         </p>
       </footer>
     </div>
+    <script src="sessions.js"></script>
 
     <script>
-      // Placeholder data for sessions by day
-      const sessions = {
-        Monday: [
-          {
-            id: "cyber-security",
-            title: "Introduction to Cyber Security",
-            description: "A deep dive into cyber security.",
-            presenter: {
-              name: "Jane Doe",
-              linkedin: "https://www.linkedin.com/in/janedoe",
-            },
-          },
-          {
-            id: "business-analysis",
-            title: "Business Analysis",
-            description: "How to approach business analysis.",
-            presenter: {
-              name: "John Smith",
-              linkedin: "https://www.linkedin.com/in/johnsmith",
-            },
-          },
-          {
-            id: "code-future-1",
-            title: "Code The Future - Session 1",
-            description:
-              "This session introduced us to the course, our tutors, and the tech industry.",
-          },
-          {
-            id: "code-future-2",
-            title: "Code The Future - Session 2",
-            description: "In this session, we were introduced to HTML.",
-          },
-          {
-            id: "gen-ai-insights",
-            title: "Gen AI Insights with Laura Shwartz",
-            description:
-              "In this session, we explored generative AI and its applications.",
-          },
-        ],
-        // ... (keep other days' data)
-        Tuesday: [
-          {
-            id: "data-science",
-            title: "Introduction to Data Science",
-            description:
-              "Learn the basics of data science and its applications.",
-            presenter: {
-              name: "Alice Johnson",
-              linkedin: "https://www.linkedin.com/in/alicejohnson",
-            },
-          },
-          {
-            id: "code-future-3",
-            title: "Code The Future - Session 1",
-            description:
-              "This session introduced us to the course, our tutors, and the tech industry.",
-          },
-          {
-            id: "code-future-4",
-            title: "Code The Future - Session 2",
-            description: "In this session, we were introduced to HTML.",
-          },
-        ],
-        Wednesday: [
-          {
-            id: "machine-learning",
-            title: "Machine Learning 101",
-            description:
-              "An overview of machine learning concepts and techniques.",
-            presenter: {
-              name: "Carol White",
-              linkedin: "https://www.linkedin.com/in/carolwhite",
-            },
-          },
-          {
-            id: "cloud-computing",
-            title: "Cloud Computing",
-            description: "Understanding cloud computing and its benefits.",
-            presenter: {
-              name: "David Green",
-              linkedin: "https://www.linkedin.com/in/davidgreen",
-            },
-          },
-          {
-            id: "code-future-5",
-            title: "Code The Future - Session 1",
-            description:
-              "This session introduced us to the course, our tutors, and the tech industry.",
-          },
-          {
-            id: "code-future-6",
-            title: "Code The Future - Session 2",
-            description: "In this session, we were introduced to HTML.",
-          },
-        ],
-        Thursday: [
-          {
-            id: "devops",
-            title: "Introduction to DevOps",
-            description: "Learn about DevOps practices and tools.",
-            presenter: {
-              name: "Eve Black",
-              linkedin: "https://www.linkedin.com/in/eveblack",
-            },
-          },
-          {
-            id: "cyber-security-advanced",
-            title: "Advanced Cyber Security",
-            description: "Dive deeper into advanced cyber security topics.",
-            presenter: {
-              name: "Frank Blue",
-              linkedin: "https://www.linkedin.com/in/frankblue",
-            },
-          },
-          {
-            id: "Code The Future ",
-            title: "Personal Site - Drop in Call",
-            description:
-              "This session introduced us to the course, our tutors, and the tech industry.",
-          },
-        ],
-        Friday: [
-          {
-            id: "ai-ethics",
-            title: "AI Ethics",
-            description:
-              "Explore the ethical considerations in AI development.",
-            presenter: {
-              name: "Grace Red",
-              linkedin: "https://www.linkedin.com/in/gracered",
-            },
-          },
-          {
-            id: "project-management",
-            title: "Project Management",
-            description: "Learn the fundamentals of project management.",
-            presenter: {
-              name: "Henry Yellow",
-              linkedin: "https://www.linkedin.com/in/henryyellow",
-            },
-          },
-        ],
-      };
+      console.log(sessions);
 
       function filterByDay(day) {
         const sessionContainer = document.getElementById("sessionContainer");
@@ -298,9 +227,14 @@
           const sessionCard = document.createElement("div");
           sessionCard.classList.add("session-card");
           sessionCard.innerHTML = `
+            <p class="time">${session.time}</p>
             <h2>${session.title}</h2>
-            <p>${session.description}</p>
-            <a href="session.html?id=${session.id}">Read more</a>
+            <p class="description">${session.description}</p>
+            <p class="presenter">Presented by: <a href="${session.presenter?.linkedin}" target="_blank">${session.presenter?.name}</a></p>
+            <div class="card-footer">
+              <span></span>
+              <a href="session.html?id=${session.id}" class="read-more">Read more</a>
+            </div>
           `;
           sessionContainer.appendChild(sessionCard);
         });

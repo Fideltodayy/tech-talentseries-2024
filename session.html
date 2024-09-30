@@ -6,66 +6,134 @@
     <title>Session Details - Code the Future</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
+        font-family: "Arial", sans-serif;
+        line-height: 1.7;
         color: #333;
-        background-color: #f4f4f4;
+        background-color: #fafafa;
         margin: 0;
         padding: 0;
       }
+
       .container {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 20px auto;
         padding: 20px;
         background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
       }
+
       h1 {
+        font-size: 1.8rem;
         color: #2c3e50;
         border-bottom: 2px solid #3498db;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
       }
+
       .back-link {
         display: inline-block;
         margin-bottom: 20px;
         color: #3498db;
         text-decoration: none;
+        font-size: 1rem;
       }
+
       .session-content {
-        margin-top: 20px;
+        margin-top: 10px;
+        font-size: 1rem;
       }
+
       .session-content p {
         margin-bottom: 15px;
       }
-      .session-content ul {
-        padding-left: 20px;
+      .session-time {
+        font-size: 1rem;
+        color: #3498db;
+        margin-bottom: 15px;
       }
       .presenter-info {
-        background-color: #f4f4f4;
-        border-radius: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
         padding: 15px;
-        margin-top: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-top: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       }
+
+      .presenter-info img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-right: 15px;
+        margin-bottom: 10px;
+      }
+
+      .presenter-info div {
+        flex: 1;
+      }
+
       .presenter-info h2 {
         color: #2c3e50;
         margin-top: 0;
+        font-size: 1.2rem;
       }
-      .presenter-info img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        float: left;
-        margin-right: 15px;
-      }
+
       .presenter-info p {
         margin: 5px 0;
+        font-size: 0.9rem;
+        color: #7f8c8d;
       }
+
       .presenter-info a {
         color: #3498db;
         text-decoration: none;
+        font-size: 0.9rem;
       }
+
       .presenter-info a:hover {
         text-decoration: underline;
+      }
+
+      /* Mobile responsiveness */
+      @media screen and (max-width: 768px) {
+        .container {
+          padding: 15px;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+          padding-bottom: 5px;
+        }
+
+        .back-link {
+          font-size: 0.9rem;
+        }
+
+        .session-content {
+          font-size: 0.95rem;
+        }
+
+        .presenter-info {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .presenter-info img {
+          margin: 0 auto 10px;
+        }
+
+        .presenter-info h2 {
+          font-size: 1.1rem;
+        }
+
+        .presenter-info p,
+        .presenter-info a {
+          font-size: 0.85rem;
+        }
       }
     </style>
   </head>
@@ -73,65 +141,27 @@
     <div class="container">
       <a href="sessions.html" class="back-link">&larr; Back to Sessions</a>
       <h1 id="sessionTitle">Session Title</h1>
+      <p id="sessionTime" class="session-time"></p>
       <div id="sessionContent" class="session-content">
         <!-- Session content will be dynamically inserted here -->
       </div>
       <div id="presenterInfo" class="presenter-info">
         <!-- Presenter information will be dynamically inserted here -->
+        <img src="#" alt="Presenter Image" />
+        <div>
+          <h2>Presented by: Presenter Name</h2>
+          <p><strong>Job Title</strong></p>
+          <p>
+            Short bio about the presenter. This section gives an overview of the
+            presenter's background and experience.
+          </p>
+          <p><a href="#">Connect on LinkedIn</a></p>
+        </div>
       </div>
     </div>
 
+    <script src="sessions.js"></script>
     <script>
-      // Full session data (you would typically fetch this from a server)
-      const sessionsData = {
-        "cyber-security": {
-          title: "Introduction to Cyber Security",
-          content: `
-                    <p>This session provides a comprehensive introduction to the world of cyber security. We explore the fundamental concepts, current threats, and best practices for maintaining digital safety.</p>
-                    <h2>Key Topics Covered:</h2>
-                    <ul>
-                        <li>Overview of cyber security landscape</li>
-                        <li>Common types of cyber attacks</li>
-                        <li>Basic principles of network security</li>
-                        <li>Introduction to encryption and its importance</li>
-                        <li>Best practices for personal and organizational cyber hygiene</li>
-                    </ul>
-                    <p>By the end of this session, participants will have a solid foundation in cyber security concepts and be better equipped to protect themselves and their organizations in the digital world.</p>
-                `,
-          presenter: {
-            name: "Hauwa Saleh",
-            title: "Senior Cyber Security Analyst",
-            bio: "Hauwa Saleh is a seasoned cyber security professional with over 10 years of experience in the field. She has worked with Fortune 500 companies to secure their digital assets and train their teams in best security practices.",
-            linkedin: "https://www.linkedin.com/in/hauwa-s-3249a61b1/",
-            image: "https://via.placeholder.com/200",
-          },
-        },
-        "code-future-2": {
-          title: "Code The Future - Session 2",
-          content: `
-                    <p>In this session, we were introduced to HTML. The session was divided into sections that guided us through building a basic HTML page using various tags and utilizing browser dev tools.</p>
-                    <p>We started with terminal setup before transitioning to VS Code.</p>
-                    <h2>Session Goals:</h2>
-                    <ul>
-                        <li>Understanding what HTML is and its uses</li>
-                        <li>Recognizing and writing the structure of a basic HTML page</li>
-                        <li>Using common HTML elements to add content to a page</li>
-                        <li>Utilizing Chrome Dev Tools to inspect pages</li>
-                        <li>Creating our own HTML page with various HTML elements</li>
-                    </ul>
-                    <p>This session provided a comprehensive overview of HTML, and I learned how to create and inspect HTML pages effectively.</p>
-                `,
-          presenter: {
-            name: "Gwyn Chigwa",
-            title: "Managing Business Analyst",
-            bio: "Chigwa is a seasoned business analyst with over 10 years of experience in the field. He has worked with Fortune 500 companies to analyze their business processes and recommend improvements for efficiency and growth.",
-            // linkedin: "https://www.linkedin.com/in/hauwa-s-3249a61b1/",
-            image: "https://via.placeholder.com/200",
-          },
-        },
-        // Add more session data as needed
-      };
-
       function getSessionIdFromURL() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get("id");
@@ -139,20 +169,29 @@
 
       function loadSessionContent() {
         const sessionId = getSessionIdFromURL();
-        const session = sessionsData[sessionId];
+        let session;
+
+        // Search for the session in all days
+        for (const day in sessions) {
+          session = sessions[day].find((s) => s.id === sessionId);
+          if (session) break;
+        }
 
         if (session) {
           document.getElementById("sessionTitle").textContent = session.title;
+          document.getElementById("sessionTime").textContent = session.time;
           document.getElementById("sessionContent").innerHTML = session.content;
 
           const presenterInfo = document.getElementById("presenterInfo");
           presenterInfo.innerHTML = `
-                    <img src="${session.presenter.image}" alt="${session.presenter.name}">
-                    <h2>Presented by: ${session.presenter.name}</h2>
-                    <p><strong>${session.presenter.title}</strong></p>
-                    <p>${session.presenter.bio}</p>
-                    <p><a href="${session.presenter.linkedin}" target="_blank">Connect on LinkedIn</a></p>
-                `;
+            <img src="${session.presenter.image}" alt="${session.presenter.name}" />
+            <div>
+              <h2>Presented by: ${session.presenter.name}</h2>
+              <p><strong>${session.presenter.title}</strong></p>
+              <p>${session.presenter.bio}</p>
+              <p><a href="${session.presenter.linkedin}" target="_blank">Connect on LinkedIn</a></p>
+            </div>
+          `;
         } else {
           document.getElementById("sessionContent").innerHTML =
             "<p>Session not found.</p>";
@@ -164,4 +203,3 @@
     </script>
   </body>
 </html>
-</script>

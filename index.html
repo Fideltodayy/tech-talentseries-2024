@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Empowering tomorrow's tech leaders with cutting-edge skills. Explore the sessions in our 'Code the Future' series!"
+    />
     <title>Code the Future - Empowering Tomorrow's Tech Leaders</title>
     <style>
       body,
@@ -58,12 +62,24 @@
       .cta-button:hover {
         background-color: #2980b9;
       }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+        .cta-button {
+          padding: 10px 20px;
+          font-size: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
     <canvas id="particles-canvas"></canvas>
     <div class="hero">
-      <div class="hero-content">
+      <header class="hero-content">
         <h1>Tech Talent Series</h1>
         <h2 style="font-size: 2rem; margin-top: -10px">X</h2>
         <h1 style="margin-top: -10px">Code the Future</h1>
@@ -73,7 +89,7 @@
           growth in the world of technology.
         </p>
         <a href="sessions.html" class="cta-button">Explore Our Sessions</a>
-      </div>
+      </header>
     </div>
 
     <script>
@@ -83,7 +99,7 @@
       canvas.height = window.innerHeight;
 
       const particles = [];
-      const particleCount = 100;
+      const particleCount = 50;
 
       class Particle {
         constructor() {
